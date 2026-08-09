@@ -389,7 +389,8 @@ fn trailing_url_end(candidate: &str) -> usize {
 pub(crate) fn web_destination(destination: &str) -> Option<String> {
     let safe_destination = sanitized_destination(destination)?;
     let parsed = Url::parse(&safe_destination).ok()?;
-    matches!(parsed.scheme(), "http" | "https")
+    // #fix EPY-503 放行出处 warposs scheme：使 warposs:// 在 TUI 成 OSC 8 可点链接
+    matches!(parsed.scheme(), "http" | "https" | "warposs")
         .then(|| parsed.host_str())
         .flatten()?;
     Some(safe_destination)
