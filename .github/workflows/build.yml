@@ -1,0 +1,25 @@
+name: build-codex-arm64
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: codex-rs
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain (auto-installs rust-toolchain.toml)
+        run: rustup show
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: codex-rs
+      - name: Build codex (aarch64-apple-darwin)
+        run: cargo build --release --bin codex
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codex-aarch64-apple-darwin
+          path: codex-rs/target/release/codex
+          if-no-files-found: error
