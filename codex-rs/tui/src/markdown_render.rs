@@ -356,8 +356,9 @@ struct LinkState {
     local_label_spans: Vec<Span<'static>>,
 }
 
-fn should_render_link_destination(dest_url: &str) -> bool {
-    !is_local_path_like_link(dest_url)
+fn should_render_link_destination(_dest_url: &str) -> bool {
+    // #fix EPY-503 关 ④：出处不再把 URL 当可见后缀强显（label 仍 OSC8 可点）
+    false
 }
 
 /// Stateful pulldown-cmark event consumer that builds styled `ratatui` output.
