@@ -821,7 +821,8 @@ impl<'a, 'policy> Writer<'a, 'policy> {
             self.needs_newline = false;
         }
         self.indent_stack.push(IndentContext::new(
-            vec![Span::from("> ")],
+            // #fix EPY-759 引用块前缀换八分之一块：块元素画到格边，跨行接得上且够细
+            vec![Span::from("▏ ")],
             /*marker*/ None,
             /*is_list*/ false,
         ));
