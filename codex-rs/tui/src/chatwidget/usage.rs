@@ -508,7 +508,6 @@ impl ChatWidget {
         if let Ok(response) = result {
             let available_count = response.available_count;
             self.available_rate_limit_reset_credits = Some(available_count);
-            self.set_rate_limit_reset_available_hint(available_count);
         }
         true
     }
