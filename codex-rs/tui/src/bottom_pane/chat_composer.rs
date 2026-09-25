@@ -2997,10 +2997,18 @@ impl ChatComposer {
             text_elements = Self::trim_text_elements(&expanded_input, &text, text_elements);
         }
 
-        if slash_validation == SlashValidation::Immediate
-            && let SubmissionValidation::UnknownCommand(name) = self
-                .slash_input()
-                .validate_submission(&text, input_starts_with_space)
+        let validation = self
+            .slash_input()
+            .validate_submission(&text, input_starts_with_space);
+        if let SubmissionValidation::UnknownCommand(name) = &validation
+            && self
+                .skills
+                .as_ref()
+                .is_some_and(|skills| skills.iter().any(|skill| &skill.name == name))
+        {
+            text.replace_range(..1, "$");
+        } else if slash_validation == SlashValidation::Immediate
+            && let SubmissionValidation::UnknownCommand(name) = validation
         {
             let message = format!(
                 r#"Unrecognized command '/{name}'. Type "/" for a list of supported commands."#
