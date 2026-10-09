@@ -193,8 +193,8 @@ fn sparkle_fades_without_adding_dots_and_finishes_by_fifteen_seconds() {
         assert!(!dots(&fading).is_empty());
         assert!(dots(&fading).iter().all(|dot| dots(&last).contains(dot)));
         let contrast = |cell: &ratatui::buffer::Cell| match (cell.fg, cell.bg) {
-            (Color::Rgb(fr, fg, fb), Color::Rgb(br, bg, bb)) => {
-                u32::from(fr.abs_diff(br)) + u32::from(fg.abs_diff(bg)) + u32::from(fb.abs_diff(bb))
+            (Color::Rgb(fr, fg, fb), Color::Reset) => {
+                u32::from(fr.abs_diff(36)) + u32::from(fg.abs_diff(27)) + u32::from(fb.abs_diff(53))
             }
             colors => panic!("expected true color: {colors:?}"),
         };

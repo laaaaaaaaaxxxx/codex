@@ -52,8 +52,7 @@ fn prompt_margin_and_blank_background_survive_resize_without_changing_copy() {
     let message =
         "1234567890123456789012345678901234567890123456789012345678\n\n  界e\u{301}👩‍💻 trailing";
     let cell = new_user_prompt(message.into(), Vec::new(), Vec::new(), Vec::new());
-    // Fix the inherited style without changing the process-wide terminal palette.
-    let style = Style::default().on_dark_gray();
+    let style = Style::default().bg(ratatui::style::Color::Reset);
     let initial_lines = styled_prompt_lines(&cell, /*width*/ 60, style);
     let mut layout = TextLayout::new(initial_lines, /*width*/ 60);
     let expected_copy = format!("\n{message}\n");
