@@ -81,7 +81,7 @@ impl TextLayout {
                     if code {
                         copy.code || copy.code_source.is_some()
                     } else {
-                        copy.prefix.contains('>')
+                        copy.prefix.contains(['>', '▏'])
                     }
                 });
                 if matches {

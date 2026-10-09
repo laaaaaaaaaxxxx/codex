@@ -1,11 +1,12 @@
 ---
 source: tui/src/streaming/controller.rs
+assertion_line: 1524
 expression: lines_to_plain_strings(&visible_lines(rendered))
 ---
 [
-    " Key                        Value",
-    "━━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━",
-    " A (https://example.com)    row",
+    " Key    Value",
+    "━━━━━  ━━━━━━━",
+    " A      row",
     "",
     "After table.",
 ]

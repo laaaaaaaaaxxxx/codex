@@ -78,7 +78,7 @@ fn navigate_copy_resize_and_exit() {
 
       Latest plan
 
-      > assistant quote
+      ▏ assistant quote
 
       assistant code
     ");
