@@ -215,7 +215,7 @@ impl HistoryCell for UserHistoryCell {
             return Vec::new();
         }
 
-        let mut lines = vec![HyperlinkLine::new(Line::from("").style(style))];
+        let mut lines = vec![HyperlinkLine::new(Line::from(""))];
 
         if !wrapped_images.is_empty() {
             lines.extend(prefix_hyperlink_lines(
@@ -240,7 +240,7 @@ impl HistoryCell for UserHistoryCell {
             ));
         }
 
-        lines.push(HyperlinkLine::new(Line::from("").style(style)));
+        lines.push(HyperlinkLine::new(Line::from("")));
         for source in lines.iter_mut().filter_map(|line| line.source.as_mut()) {
             source.right_reserve = 1;
             source.copy_as_prose = true;

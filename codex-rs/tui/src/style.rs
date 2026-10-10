@@ -61,9 +61,16 @@ pub fn user_message_style() -> Style {
     user_message_style_for(default_bg())
 }
 
-/// Submitted prompts retain the terminal's default background.
 pub(crate) fn history_prompt_style() -> Style {
-    Style::default().bg(Color::Reset)
+    let Some(background) = default_bg() else {
+        return Style::default();
+    };
+    let (foreground, alpha) = if is_light(background) {
+        ((0, 0, 0), 0.02)
+    } else {
+        ((255, 255, 255), 0.16)
+    };
+    Style::default().bg(best_color(blend(foreground, background, alpha)))
 }
 
 pub fn proposed_plan_style() -> Style {
